@@ -4,5 +4,5 @@ from .models import ChatRoom
 class ChatRoomSerializer (serializers.ModelSerializer):
   class Meta:
     model = ChatRoom
-    fields = ('id', 'name', 'image' )
+    fields = ('__all__')
 
