@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'chat',
     'chatrooms',
+    'jwt_auth',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'jwt_auth.authentication.JWTAuthentication',
+    ],
+}
+
+
+AUTH_USER_MODEL = 'jwt_auth.CustomUser'
