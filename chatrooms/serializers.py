@@ -5,3 +5,5 @@ class ChatRoomSerializer (serializers.ModelSerializer):
   class Meta:
     model = ChatRoom
     fields = ('id', 'name', 'image' )
+
+    
