@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "eslint-plugin-django": "^1.1.0"
+  }
+}

@@ -4,6 +4,7 @@ from operator import truediv
 from .models import Chat
 from .serializers import ChatSerializer
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 
 
@@ -14,4 +15,7 @@ class ListView(APIView):
         return Response(serializer.data)
 
 
+class ChatView(RetrieveUpdateDestroyAPIView):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
 # Create your views here.
