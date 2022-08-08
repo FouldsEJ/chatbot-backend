@@ -3,5 +3,5 @@ from .views import *
 
 urlpatterns = [
     path('', ListView.as_view()),
-    path('<int:pk>/', ChatRoomDetail.as_view())
+    path('<int:pk>/', ListView.as_view())
 ]
