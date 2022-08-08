@@ -13,7 +13,7 @@ class chat(models.Model):
                                )
     # sender_id = models.ForeignKey(UserID,)
     creation_time = models.DateTimeField(auto_now_add=True)
-    message = models.CharField(max_length='', unique=False)
+    message = models.TextField(unique=False)
     messageDelivered = models.BooleanField(default=False)
     messageRead = models.BooleanField(default=False)
     # ChatRoomID = models.ForeignKey(CharRoomID,)
