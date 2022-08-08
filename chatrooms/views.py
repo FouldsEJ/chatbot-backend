@@ -1,8 +1,10 @@
 from urllib import request
 from django.shortcuts import render
+from rest_framework.views import APIView
 
 from chatrooms.models import ChatRoom
 from chatrooms.serializers import ChatRoomSerializer
+from rest_framework.response import Response
 
 # Create your views here.
 
