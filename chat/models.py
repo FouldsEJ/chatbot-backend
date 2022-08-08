@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 
-class chat(models.Model):
+class Chat(models.Model):
     chat_id = models.AutoField(auto_created=True,
                                primary_key=True,
                                serialize=False,
