@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from django.views.generic.detail import DetailView
 from rest_framework.exceptions import PermissionDenied
-
+from rest_framework.permissions import IsAuthenticated
 
 from chatrooms.models import ChatRoom
 from chatrooms.serializers import ChatRoomSerializer
@@ -27,7 +27,16 @@ class ListView(DetailView):
     serializer = ChatRoomSerializer(chatroom)
     return Response(serializer.data)
   
+class CreateChatView(APIView):
+      permission_classes = [IsAuthenticated, ]
+     
+      def post(self, request):
+        serializer = ChatRoomSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Chatroom created'})
 
+        return Response(serializer.errors, status=422)
 
 # class ChatRoomDetail(RetrieveUpdateDestroyAPIView):
 #     queryset = ChatRoom.objects.all()
