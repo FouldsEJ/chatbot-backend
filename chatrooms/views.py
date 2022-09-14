@@ -34,11 +34,13 @@ class CreateChatView(APIView):
         serializer = ChatRoomSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Chatroom created'})
+            return Response({'message': 'Chatroom created', 'chatroomId': serializer.data})
 
         return Response(serializer.errors, status=422)
 
-# class ChatRoomDetail(RetrieveUpdateDestroyAPIView):
-#     queryset = ChatRoom.objects.all()
-#     serializer_class = ChatRoomSerializer
+class ChatRoomDetail(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, ]
+    
+    queryset = ChatRoom.objects.all()
+    serializer_class = ChatRoomSerializer
 

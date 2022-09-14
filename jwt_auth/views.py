@@ -50,7 +50,7 @@ class LoginView(APIView):
 
         token = jwt.encode({'sub': user.id, 'username': user.username, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
-        return Response({'token': token, 'message': f'Welcome back {user.username}!'})
+        return Response({'token': token, 'message': f'Welcome back {user.username}!','userid': user.id})
 
 
 class CredentialsView(APIView):

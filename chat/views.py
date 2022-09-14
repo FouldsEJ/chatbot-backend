@@ -6,16 +6,33 @@ from .serializers import ChatSerializer
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
+from django.http import JsonResponse
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticated
+
 
 
 class ListView(APIView):
     def get(self, _request):
+        print('THISISTHEREQEST', _request)
         chats = Chat.objects.all()
+        
         serializer = ChatSerializer(chats, many=True)
         return Response(serializer.data)
 
 
 class ChatView(RetrieveUpdateDestroyAPIView):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
+   permission_classes = [IsAuthenticated, ]
+   def get(self, _request, pk):
+    print('THISISTHEPRINT', self, _request, pk, 'FILTER', Chat.objects.filter(ChatRoomID=pk) )
+
+    obj = list(Chat.objects.filter(ChatRoomID=pk))
+    serializer_class = ChatSerializer(obj, many=True)
+
+    return JsonResponse( {'data': serializer_class.data})
+
+   
+#  if not chatroom.users.filter(self.request.user): # Or how ever you validate
+#         raise PermissionDenied('User is not allowed to modify listing')
+    
 # Create your views here.

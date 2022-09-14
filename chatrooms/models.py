@@ -9,7 +9,7 @@ User = get_user_model()
 # Create your models here.
 class ChatRoom (models.Model):
   name = models.CharField(max_length=100)
-  image = models.CharField(max_length=100)
+  image = models.CharField(max_length=1000)
   users = models.ManyToManyField(User, related_name='chatrooms', blank="True")
   
 
