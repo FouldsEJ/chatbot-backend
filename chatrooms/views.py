@@ -5,6 +5,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from django.views.generic.detail import DetailView
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
 
 from chatrooms.models import ChatRoom
 from chatrooms.serializers import ChatRoomSerializer
@@ -13,19 +14,27 @@ from rest_framework.response import Response
 # Create your views here.
 
 class ListView(DetailView):
-  def get(self, request, pk):
-    print('working')
-    print(self)
-    print(pk)
-     
+   permission_classes = [IsAuthenticated, ]
+   def get(self, request, pk):
     chatroom = ChatRoom.objects.get(id=pk)
-    print(chatroom)
-    print(self.request)
+         
     if not chatroom.users.filter(self.request.user): # Or how ever you validate
-        raise PermissionDenied('User is not allowed to modify listing')
+     raise PermissionDenied('User is not allowed to modify listing')
+    
+     serializer = ChatRoomSerializer(chatroom)
+     return Response(serializer.data)
 
-    serializer = ChatRoomSerializer(chatroom)
-    return Response(serializer.data)
+
+class ListAllChatsView(APIView):
+   permission_classes = [IsAuthenticated, ]
+   def get(self, _request, pk):
+        
+      obj = list(ChatRoom.objects.filter(users=pk))
+      serializer_class = ChatRoomSerializer(obj, many=True)
+        
+      return JsonResponse( {'data': serializer_class.data})
+
+      
   
 class CreateChatView(APIView):
       permission_classes = [IsAuthenticated, ]

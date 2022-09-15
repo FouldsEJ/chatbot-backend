@@ -24,15 +24,22 @@ class ListView(APIView):
 class ChatView(RetrieveUpdateDestroyAPIView):
    permission_classes = [IsAuthenticated, ]
    def get(self, _request, pk):
-    print('THISISTHEPRINT', self, _request, pk, 'FILTER', Chat.objects.filter(ChatRoomID=pk) )
 
     obj = list(Chat.objects.filter(ChatRoomID=pk))
     serializer_class = ChatSerializer(obj, many=True)
 
     return JsonResponse( {'data': serializer_class.data})
 
-   
-#  if not chatroom.users.filter(self.request.user): # Or how ever you validate
-#         raise PermissionDenied('User is not allowed to modify listing')
-    
+class SendChatView(APIView):
+      permission_classes = [IsAuthenticated, ]
+     
+      def post(self, request, pk):
+        serializer = ChatSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Chat sent'})
+
+        return Response(serializer.errors, status=422)
+
+
 # Create your views here.
