@@ -29,3 +29,16 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('__all__')
+
+class UserSerializerForChatrooms(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'last_login', 'image')
+
+class UserSerializerForChat(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username')        
+

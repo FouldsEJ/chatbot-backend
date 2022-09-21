@@ -14,7 +14,6 @@ from rest_framework.permissions import IsAuthenticated
 
 class ListView(APIView):
     def get(self, _request):
-        print('THISISTHEREQEST', _request)
         chats = Chat.objects.all()
         
         serializer = ChatSerializer(chats, many=True)
@@ -34,7 +33,7 @@ class SendChatView(APIView):
       permission_classes = [IsAuthenticated, ]
      
       def post(self, request, pk):
-        serializer = ChatSerializer(data=request.data)
+        serializer = ChatSerializer2(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Chat sent'})

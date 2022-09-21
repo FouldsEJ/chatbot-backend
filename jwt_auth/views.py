@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from jwt_auth.serializers import UserSerializer
+from jwt_auth.serializers import *
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
@@ -9,6 +9,7 @@ from django.conf import settings
 import jwt
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime, timedelta
+from django.http import JsonResponse
 
 
 User = get_user_model()
@@ -17,25 +18,18 @@ User = get_user_model()
 class RegisterView(APIView):
     def post(self, request):
 
-        email = request.data.get('email')
-
-        try:
-            User.objects.get(email=email)
-            return Response({'message': 'A user with that email address already exists'})
-        except User.DoesNotExist:
-            pass
-
+       
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Registration successful'})
 
-        return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        return JsonResponse(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
 class LoginView(APIView):
     def post(self, request):
-        email = request.data.get('email')
+        email = request.data.get('email') 
         password = request.data.get('password')
 
         try:
@@ -60,3 +54,37 @@ class CredentialsView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+class ListView(APIView):
+
+   permission_classes = [IsAuthenticated, ]
+
+   def get(self, _request, pk):
+        chats = User.objects.all()
+        
+        obj = list(User.objects.filter(id=pk))
+        serializer_class = UserSerializer(obj, many=True)
+
+        return JsonResponse( {'data': serializer_class.data})
+
+class ListViewForAllUsers(APIView):
+
+   permission_classes = [IsAuthenticated, ]
+
+   def get(self, _request, ):        
+        obj = list(User.objects.all())
+        serializer_class = UserSerializerForChat(obj, many=True)
+
+        return JsonResponse( {'data': serializer_class.data})        
+
+class ListViewUserFromId(APIView):
+
+   permission_classes = [IsAuthenticated, ]
+
+   def get(self, _request, pk):
+        chats = User.objects.all()
+        
+        obj = list(User.objects.filter(id=pk))
+        serializer_class = UserSerializerForChat(obj, many=True)
+
+        return JsonResponse( {'data': serializer_class.data})
