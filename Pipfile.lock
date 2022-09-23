@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c7af2d9945c20394181ee8a5edc148e9a32297cee34c4818cd25bb3b116ee385"
+            "sha256": "cc5a44b12b360437dc8cc58acc6cc14e9b9f1c8c7ecdcc021a4e283af1ae0f14"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.10"
+            "python_version": "3.9"
         },
         "sources": [
             {
@@ -23,6 +23,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==3.5.2"
+        },
+        "asn1crypto": {
+            "hashes": [
+                "sha256:13ae38502be632115abf8a24cbe5f4da52e3b5231990aff31123c805306ccb9c",
+                "sha256:db4e40728b728508912cbb3d44f19ce188f218e9eba635821bb4b68564f8fd67"
+            ],
+            "version": "==1.5.1"
         },
         "dj-database-url": {
             "hashes": [
@@ -63,6 +70,22 @@
             ],
             "index": "pypi",
             "version": "==3.14.0"
+        },
+        "pg8000": {
+            "hashes": [
+                "sha256:80b4f4de4b0254832b7948511e0dd46342d1c0446ccd4fdd892b63d02e4fbc7b",
+                "sha256:d9a21291ecf74ee626e704c690f2e5ccbaa3fd656be202673f13f39fe1b7029f"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==1.29.1"
+        },
+        "postgresqlite": {
+            "hashes": [
+                "sha256:6a8965efbc2192f8d4ae3fcad1b870658f77c32858107dd22cedcb2a320d4e4a",
+                "sha256:7b5b17f635492ff47aa63d08439be0849f3ef23608413376aa9135cef44890cb"
+            ],
+            "index": "pypi",
+            "version": "==0.2.15"
         },
         "psycopg2-binary": {
             "hashes": [
@@ -148,6 +171,14 @@
                 "sha256:cea221417204f2d1a2aa03ddae3e867921971d0d76f14d87abb4414415bbdcf5"
             ],
             "version": "==2022.2.1"
+        },
+        "scramp": {
+            "hashes": [
+                "sha256:93c9cc2ffe54a451e02981c07a5a23cbd830701102789939cfb4ff91efd6ca8c",
+                "sha256:f964801077be9be2a1416ffe255d2d78834b3d9d5c8ce5d28f76a856f209f70e"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==1.4.1"
         },
         "sqlparse": {
             "hashes": [
