@@ -12,9 +12,8 @@ python-dotenv = "*"
 dj-database-url = "*"
 django-on-heroku = "*"
 django-cors-headers = "*"
-postgresqlite = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
