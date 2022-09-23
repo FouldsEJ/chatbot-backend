@@ -45,7 +45,7 @@ class CreateChatView(APIView):
       permission_classes = [IsAuthenticated, ]
      
       def post(self, request):
-        serializer = ChatRoomSerializer2(data=request.data)
+        serializer = ChatRoomSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Chatroom created', 'chatroomId': serializer.data})
